@@ -65,26 +65,43 @@ class RAS_WF_Feedback_Tool {
             'userId'        => get_current_user_id(),
             'userName'      => is_user_logged_in() ? wp_get_current_user()->display_name : '',
             'i18n'          => array(
-                'feedbackButton'    => __( 'Feedback', 'ras-website-feedback' ),
+                // FAB Button
+                'openFeedback'      => __( 'Feedback', 'ras-website-feedback' ),
+                // Selection mode
                 'selectElement'     => __( 'Click on an element to add feedback', 'ras-website-feedback' ),
                 'cancel'            => __( 'Cancel', 'ras-website-feedback' ),
+                // Modal form
+                'addFeedback'       => __( 'Add Feedback', 'ras-website-feedback' ),
+                'yourFeedback'      => __( 'Your feedback', 'ras-website-feedback' ),
+                'feedbackPlaceholder' => __( 'Describe the issue or suggestion...', 'ras-website-feedback' ),
                 'submit'            => __( 'Submit', 'ras-website-feedback' ),
                 'submitting'        => __( 'Submitting...', 'ras-website-feedback' ),
-                'reply'             => __( 'Reply', 'ras-website-feedback' ),
-                'addReply'          => __( 'Add Reply', 'ras-website-feedback' ),
-                'yourName'          => __( 'Your Name', 'ras-website-feedback' ),
-                'yourFeedback'      => __( 'Your feedback...', 'ras-website-feedback' ),
-                'noFeedback'        => __( 'No feedback for this page yet.', 'ras-website-feedback' ),
-                'feedbackFor'       => __( 'Feedback for this page', 'ras-website-feedback' ),
+                'close'             => __( 'Close', 'ras-website-feedback' ),
+                // Drawer
+                'pageFeedback'      => __( 'Page Feedback', 'ras-website-feedback' ),
                 'unresolved'        => __( 'Unresolved', 'ras-website-feedback' ),
                 'pending'           => __( 'Pending', 'ras-website-feedback' ),
                 'resolved'          => __( 'Resolved', 'ras-website-feedback' ),
-                'close'             => __( 'Close', 'ras-website-feedback' ),
+                'addNew'            => __( '+ Add New', 'ras-website-feedback' ),
+                'noFeedback'        => __( 'No feedback for this page yet.', 'ras-website-feedback' ),
+                // Card actions
+                'replies'           => __( 'Replies', 'ras-website-feedback' ),
+                'reply'             => __( 'Reply', 'ras-website-feedback' ),
+                'addReply'          => __( 'Add Reply', 'ras-website-feedback' ),
+                'locateElement'     => __( 'Locate element on page', 'ras-website-feedback' ),
+                'markResolved'      => __( 'Mark as resolved', 'ras-website-feedback' ),
+                'reopen'            => __( 'Reopen', 'ras-website-feedback' ),
+                'viewOnPage'        => __( 'View on page', 'ras-website-feedback' ),
+                // Messages
                 'errorSubmit'       => __( 'Failed to submit feedback. Please try again.', 'ras-website-feedback' ),
                 'successSubmit'     => __( 'Feedback submitted successfully!', 'ras-website-feedback' ),
+                'feedbackSubmitted' => __( 'Feedback submitted!', 'ras-website-feedback' ),
+                'statusUpdated'     => __( 'Status updated', 'ras-website-feedback' ),
+                'elementNotFound'   => __( 'Element not found on page', 'ras-website-feedback' ),
+                'error'             => __( 'An error occurred. Please try again.', 'ras-website-feedback' ),
                 'pressEscToCancel'  => __( 'Press ESC to cancel', 'ras-website-feedback' ),
-                'replies'           => __( 'Replies', 'ras-website-feedback' ),
-                'viewOnPage'        => __( 'View on page', 'ras-website-feedback' ),
+                // Legacy (keeping for compatibility)
+                'yourName'          => __( 'Your Name', 'ras-website-feedback' ),
             ),
         ) );
     }

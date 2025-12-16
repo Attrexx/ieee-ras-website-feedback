@@ -120,7 +120,7 @@
 /* ========================================
    Element Highlighter
    ======================================== */
-.ras-wf-highlight-overlay {
+.ras-wf-highlighter {
     position: fixed;
     pointer-events: none;
     z-index: var(--ras-wf-z-highlight);
@@ -128,6 +128,16 @@
     border: 2px solid var(--ras-wf-primary);
     border-radius: 2px;
     transition: all 0.1s ease-out;
+    display: none;
+}
+
+.ras-wf-highlighter.active {
+    display: block;
+}
+
+.ras-wf-highlighter.ras-wf-locate-highlight {
+    background: rgba(0, 163, 42, 0.2);
+    border-color: var(--ras-wf-success);
 }
 
 .ras-wf-highlight-label {
@@ -147,7 +157,7 @@
 }
 
 /* Selection Mode Banner */
-.ras-wf-selection-mode {
+.ras-wf-selection-banner {
     position: fixed;
     top: 0;
     left: 0;
@@ -158,11 +168,15 @@
     text-align: center;
     padding: 12px 20px;
     font-size: 14px;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     gap: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ras-wf-selection-banner.active {
+    display: flex;
 }
 
 .ras-wf-selection-mode span {
@@ -196,41 +210,41 @@ body.ras-wf-selecting * {
 /* ========================================
    Feedback Form Modal
    ======================================== */
-.ras-wf-modal-backdrop {
+.ras-wf-modal-overlay {
     position: fixed;
     inset: 0;
     z-index: var(--ras-wf-z-modal);
     background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s, visibility 0.2s;
+    display: none;
 }
 
-.ras-wf-modal-backdrop.ras-wf-visible {
-    opacity: 1;
-    visibility: visible;
+.ras-wf-modal-overlay.active {
+    display: block;
 }
 
 .ras-wf-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: calc(var(--ras-wf-z-modal) + 1);
     background: var(--ras-wf-bg);
     border-radius: var(--ras-wf-radius);
     box-shadow: var(--ras-wf-shadow);
-    width: 100%;
+    width: calc(100% - 40px);
     max-width: 480px;
     max-height: 90vh;
     overflow: hidden;
-    display: flex;
+    display: none;
     flex-direction: column;
-    transform: translateY(20px) scale(0.95);
-    transition: transform 0.2s;
+    opacity: 0;
+    transition: transform 0.2s, opacity 0.2s;
 }
 
-.ras-wf-modal-backdrop.ras-wf-visible .ras-wf-modal {
-    transform: translateY(0) scale(1);
+.ras-wf-modal.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .ras-wf-modal-header {
@@ -374,19 +388,16 @@ body.ras-wf-selecting * {
 /* ========================================
    Feedback Drawer
    ======================================== */
-.ras-wf-drawer-backdrop {
+.ras-wf-drawer-overlay {
     position: fixed;
     inset: 0;
     z-index: var(--ras-wf-z-drawer);
     background: rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
+    display: none;
 }
 
-.ras-wf-drawer-backdrop.ras-wf-visible {
-    opacity: 1;
-    visibility: visible;
+.ras-wf-drawer-overlay.active {
+    display: block;
 }
 
 .ras-wf-drawer {
@@ -394,18 +405,19 @@ body.ras-wf-selecting * {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: var(--ras-wf-z-drawer);
+    z-index: calc(var(--ras-wf-z-drawer) + 1);
     width: 100%;
     max-width: 420px;
     background: var(--ras-wf-bg);
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
-    display: flex;
+    display: none;
     flex-direction: column;
     transform: translateX(100%);
     transition: transform 0.3s ease-out;
 }
 
-.ras-wf-drawer-backdrop.ras-wf-visible .ras-wf-drawer {
+.ras-wf-drawer.active {
+    display: flex;
     transform: translateX(0);
 }
 
@@ -469,7 +481,7 @@ body.ras-wf-selecting * {
     color: var(--ras-wf-text);
 }
 
-.ras-wf-drawer-tab.ras-wf-active {
+.ras-wf-drawer-tab.active {
     color: var(--ras-wf-primary);
     border-bottom-color: var(--ras-wf-primary);
     background: var(--ras-wf-bg);
@@ -506,6 +518,31 @@ body.ras-wf-selecting * {
     flex: 1;
     overflow-y: auto;
     padding: 16px;
+}
+
+/* Add Feedback Button */
+.ras-wf-add-feedback-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 12px;
+    background: var(--ras-wf-primary);
+    color: #fff;
+    border-radius: var(--ras-wf-radius);
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.ras-wf-add-feedback-btn:hover {
+    background: var(--ras-wf-primary-hover);
+}
+
+.ras-wf-add-feedback-btn svg {
+    fill: currentColor;
 }
 
 .ras-wf-drawer-empty {
@@ -598,10 +635,84 @@ body.ras-wf-selecting * {
     word-break: break-all;
     max-height: 40px;
     overflow: hidden;
+    flex: 1;
 }
 
-/* Card Replies */
+.ras-wf-card-content {
+    padding: 12px;
+    font-size: 14px;
+    color: var(--ras-wf-text);
+    line-height: 1.5;
+}
+
+/* Card Actions */
+.ras-wf-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--ras-wf-border);
+    background: var(--ras-wf-bg-light);
+}
+
+.ras-wf-card-locate,
+.ras-wf-card-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    color: var(--ras-wf-text-light);
+    transition: background 0.2s, color 0.2s;
+}
+
+.ras-wf-card-locate:hover,
+.ras-wf-card-status:hover {
+    background: var(--ras-wf-bg);
+    color: var(--ras-wf-text);
+}
+
+.ras-wf-card-locate svg,
+.ras-wf-card-status svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.ras-wf-card-status[data-status="resolved"]:hover {
+    color: var(--ras-wf-success);
+}
+
+.ras-wf-card-status[data-status="unresolved"]:hover {
+    color: var(--ras-wf-error);
+}
+
+/* Card Meta - refactored for new card structure */
+.ras-wf-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 10px;
+    font-size: 12px;
+}
+
+.ras-wf-card-author {
+    font-weight: 600;
+    color: var(--ras-wf-text);
+}
+
+.ras-wf-card-date {
+    color: var(--ras-wf-text-light);
+}
+
 .ras-wf-card-replies {
+    color: var(--ras-wf-text-light);
+    margin-left: auto;
+}
+
+/* Card Replies Section */
+.ras-wf-card-replies-section {
     border-top: 1px solid var(--ras-wf-border);
     padding: 12px;
     background: #fafafa;
@@ -704,7 +815,7 @@ body.ras-wf-selecting * {
     transition: all 0.3s;
 }
 
-.ras-wf-toast.ras-wf-visible {
+.ras-wf-toast.active {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
