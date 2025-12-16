@@ -86,11 +86,6 @@ final class RAS_Website_Feedback {
         require_once RAS_WF_PLUGIN_DIR . 'includes/class-email-notifications.php';
         require_once RAS_WF_PLUGIN_DIR . 'includes/class-ajax-handler.php';
 
-        // Admin classes
-        if ( is_admin() ) {
-            require_once RAS_WF_PLUGIN_DIR . 'includes/admin/class-admin-dashboard.php';
-        }
-
         // Frontend classes
         if ( ! is_admin() || wp_doing_ajax() ) {
             require_once RAS_WF_PLUGIN_DIR . 'includes/frontend/class-feedback-tool.php';
@@ -110,6 +105,25 @@ final class RAS_Website_Feedback {
 
         // Load textdomain
         add_action( 'init', array( $this, 'load_textdomain' ) );
+
+        // Add settings link on plugins page
+        add_filter( 'plugin_action_links_' . RAS_WF_PLUGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+    }
+
+    /**
+     * Add settings link to plugins page
+     *
+     * @param array $links Existing links.
+     * @return array
+     */
+    public function add_plugin_action_links( $links ) {
+        $settings_link = sprintf(
+            '<a href="%s">%s</a>',
+            admin_url( 'admin.php?page=ras-website-feedback' ),
+            __( 'Settings', 'ras-website-feedback' )
+        );
+        array_unshift( $links, $settings_link );
+        return $links;
     }
 
     /**
@@ -123,8 +137,9 @@ final class RAS_Website_Feedback {
         $this->modules['notifications'] = new RAS_WF_Email_Notifications();
         $this->modules['ajax']          = new RAS_WF_Ajax_Handler();
 
-        // Admin module
+        // Admin module - always load to register menu
         if ( is_admin() ) {
+            require_once RAS_WF_PLUGIN_DIR . 'includes/admin/class-admin-dashboard.php';
             $this->modules['admin'] = new RAS_WF_Admin_Dashboard();
         }
 
