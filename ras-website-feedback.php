@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       RAS Website Feedback
- * Plugin URI:        https://github.com/AARNet/ieee-ras-website-feedback
+ * Plugin URI:        https://github.com/Attrexx/ieee-ras-website-feedback
  * Description:       Visual feedback tool allowing selected users to leave contextual feedback on page elements with Inspector-like element selection.
  * Version:           1.1.0
  * Requires at least: 5.0
@@ -15,7 +15,7 @@
  * Domain Path:       /languages
  * Network:           false
  *
- * GitHub Plugin URI: https://github.com/AARNet/ieee-ras-website-feedback
+ * GitHub Plugin URI: https://github.com/Attrexx/ieee-ras-website-feedback
  * Primary Branch:    main
  * Release Asset:     true
  *
